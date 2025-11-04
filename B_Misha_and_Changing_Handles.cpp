@@ -7,17 +7,33 @@ int main()
 
     int n;
     cin >> n;
-    vector<pair<string, string>> v;
-    for (int i = 0; i < n; i++)
+
+    map<string, string> ans, has;
+
+    for (int i = 1; i <= n; i++)
     {
-        string s1, s2;
-        cin >> s1 >> s2;
-        v.push_back({s1, s2});
+        string a, b;
+        cin >> a >> b;
+
+        if (has.find(a) != has.end())
+        {
+            string s = has[a];
+            ans[s] = b;
+            has.erase(a);
+            has[b] = s;
+        }
+        else
+        {
+            ans[a] = b;
+            has[b] = a;
+        }
     }
 
-    for (int i = 0; i < n; i++)
+    cout << ans.size() << endl;
+
+    for (auto [x, y] : ans)
     {
-        cout << v[i].first << " " << v[i].second << endl;
+        cout << x << " " << y << endl;
     }
 
     return 0;

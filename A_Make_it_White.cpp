@@ -15,16 +15,11 @@ int main()
         string s;
         cin >> s;
 
-        vector<int> v;
-        for (int i = 0; i < n; i++)
-        {
-            if (s[i] == 'B')
-            {
-                v.push_back(i);
-            }
-        }
+        int firstPos = -1, secondPos = -1;
+        firstPos = s.find('B');
+        secondPos = s.rfind('B');
 
-        cout << v[v.size() - 1] - v[0] + 1 << endl;
+        cout << secondPos - firstPos + 1 << endl;
     }
 
     return 0;

@@ -7,43 +7,37 @@ int main()
 
     int n;
     cin >> n;
-    int arr[n];
-
+    deque<int> dq(n);
     for (int i = 0; i < n; i++)
     {
-        cin >> arr[i];
+        cin >> dq[i];
     }
 
-    int first = 0, last = n - 1;
-    vector<int> v;
-
-    while (first <= last)
+    int s = 0, d = 0, i = 1;
+    while (!dq.empty())
     {
-        if (arr[first] > arr[last])
+        int left = dq.front(), right = dq.back();
+        int mx = max(left, right);
+
+        if (i % 2 != 0)
         {
-            // cout << arr[first] << endl;
-            v.push_back(arr[first]);
-            first++;
+            s = s + mx;
         }
         else
         {
-            // cout << arr[last] << endl;
-            v.push_back(arr[last]);
-            last--;
+            d = d + mx;
         }
-    }
 
-    int s = 0, d = 0;
-    for (int i = 0; i < v.size(); i++)
-    {
-        if (i % 2 == 0)
+        if (mx == left)
         {
-            s = s + v[i];
+            dq.pop_front();
         }
         else
         {
-            d = d + v[i];
+            dq.pop_back();
         }
+
+        i++;
     }
 
     cout << s << " " << d << endl;
